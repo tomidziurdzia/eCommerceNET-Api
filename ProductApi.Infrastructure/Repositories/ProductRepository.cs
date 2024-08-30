@@ -34,28 +34,89 @@ public class ProductRepository(ProductDbContext context) : IProduct
         }
     }
 
-    public Task<Response> UpdateAsync(Product entity)
+    public async Task<Response> UpdateAsync(Product entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            throw new NotImplementedException();
+        }
+        catch (Exception ex)
+        {
+            // Log the original exception
+            LogException.LogExceptions(ex);
+            
+            // display scary-free message to the client
+            return new Response(false, "Error occurred adding new product");
+        }
     }
 
-    public Task<Response> DeleteAsync(Product entity)
+    public async Task<Response> DeleteAsync(Product entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var product = await FindByIdAsync(entity.Id);
+            if (product is null)
+                return new Response(false, $"{entity.Name} not found");
+
+            context.Products.Remove(product);
+            await context.SaveChangesAsync();
+            return new Response(true, $"{entity.Name} is deleted successfully");
+        }
+        catch (Exception ex)
+        {
+            // Log the original exception
+            LogException.LogExceptions(ex);
+            
+            // display scary-free message to the client
+            return new Response(false, "Error occurred deleting product");
+        }
     }
 
-    public Task<IEnumerable<Product>> GetAllAsync(Product entity)
+    public async Task<IEnumerable<Product>> GetAllAsync(Product entity)
     {
-        throw new NotImplementedException();
+        try
+        {
+            throw new NotImplementedException();
+        }
+        catch (Exception ex)
+        {
+            // Log the original exception
+            LogException.LogExceptions(ex);
+            
+            // display scary-free message to the client
+            return new Response(false, "Error occurred adding new product");
+        }
     }
 
-    public Task<Product> FindByIdAsync(int id)
+    public async Task<Product> FindByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            throw new NotImplementedException();
+        }
+        catch (Exception ex)
+        {
+            // Log the original exception
+            LogException.LogExceptions(ex);
+            
+            // display scary-free message to the client
+            return new Response(false, "Error occurred adding new product");
+        }
     }
 
-    public Task<Product> GetByAsync(Expression<Func<Product, bool>> predicate)
+    public async Task<Product> GetByAsync(Expression<Func<Product, bool>> predicate)
     {
-        throw new NotImplementedException();
+        try
+        {
+            throw new NotImplementedException();
+        }
+        catch (Exception ex)
+        {
+            // Log the original exception
+            LogException.LogExceptions(ex);
+            
+            // display scary-free message to the client
+            return new Response(false, "Error occurred adding new product");
+        }
     }
 }
